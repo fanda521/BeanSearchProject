@@ -3,10 +3,6 @@ package com.jeffrey.searchbeandemo.entity.vo;
 import cn.zhxu.bs.bean.DbField;
 import cn.zhxu.bs.bean.SearchBean;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,32 +12,36 @@ import java.util.Date;
 /**
  * @author jeffrey
  * @version 1.0
- * @date 2023/12/18
- * @time 12:18
- * @week 星期一
+ * @date 2024/8/30
+ * @time 18:31
+ * @week 星期五
  * @description
  **/
-@SearchBean(tables = "t_people")
+
+@SearchBean(tables = "t_people t")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PeopleVO {
+public class PeopleSonSelectVO {
 
-    @DbField("t_id")
+    @DbField("t.t_id")
     private Integer id;
 
 
-    @DbField("t_name")
+    @DbField("t.t_name")
     private String name;
 
 
-    @DbField("t_age")
+    @DbField("t.t_age")
     private int age;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @DbField("t_birthday")
+    @DbField("t.t_birthday")
     private Date birthday;
 
-    @DbField("t_address")
+    @DbField("t.t_address")
     private String address;
+
+    @DbField("select c.t_number from t_idcard c where c.t_people_id = t.t_id")
+    private String cardNumber;
 }
