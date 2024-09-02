@@ -1,7 +1,7 @@
 package com.jeffrey.searchbeandemo.controller;
 
-import com.jeffrey.searchbeandemo.entity.People;
-import com.jeffrey.searchbeandemo.repository.PeopleRepository;
+import com.jeffrey.searchbeandemo.entity.primary.People;
+import com.jeffrey.searchbeandemo.dao.primary.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

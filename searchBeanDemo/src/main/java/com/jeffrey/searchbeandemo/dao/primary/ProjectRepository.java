@@ -1,7 +1,7 @@
-package com.jeffrey.searchbeandemo.repository;
+package com.jeffrey.searchbeandemo.dao.primary;
 
 
-import com.jeffrey.searchbeandemo.entity.Project;
+import com.jeffrey.searchbeandemo.entity.primary.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

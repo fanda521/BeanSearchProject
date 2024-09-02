@@ -1,4 +1,4 @@
-package com.jeffrey.searchbeandemo.entity;
+package com.jeffrey.searchbeandemo.entity.primary;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,25 +11,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 /**
  * @version 1.0
  * @Aythor allen
- * @date 2022/11/13 14:03
- * @description 学科科目 一对多 多的一方 单向 负责维护外键
+ * @date 2022/11/13 13:53
+ * @description 一对多 一的一方 单向 不维护外键
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
-@Table(name = "t_project")
-public class Project {
+@Entity
+@Table(name = "t_student")
+public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "t_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "t_sub_name")
+    @Column(name = "t_name")
     private String name;
+
 
 }

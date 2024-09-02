@@ -2,6 +2,7 @@ package com.jeffrey.searchbeandemo.service;
 
 import cn.zhxu.bs.util.MapUtils;
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
+import com.jeffrey.searchbeandemo.entity.primary.PeopleManyDataSourceVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleBuildSqlVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleDTO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
@@ -225,5 +226,9 @@ public class PeopleService {
          * limit ?, ?]
          * params: [1, %je%, 5, 0, 100]
          */
+    }
+
+    public Page<PeopleManyDataSourceVO> getPeopleManyDataSource(CustomerHttpServletRequest customerHttpServletRequest) {
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest, PeopleManyDataSourceVO.class);
     }
 }

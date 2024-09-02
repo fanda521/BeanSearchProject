@@ -1,7 +1,7 @@
-package com.jeffrey.searchbeandemo.repository;
+package com.jeffrey.searchbeandemo.dao.primary;
 
 
-import com.jeffrey.searchbeandemo.entity.IdCard;
+import com.jeffrey.searchbeandemo.entity.primary.IdCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,5 +1,7 @@
-package com.jeffrey.searchbeandemo.entity;
+package com.jeffrey.searchbeandemo.entity.primary;
 
+import cn.zhxu.bs.bean.SearchBean;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,12 +13,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 
 
 /**
  * @version 1.0
  * @Aythor allen
- * @date 2022/11/13 11:07
+ * @date 2022/11/13 10:59
  * @description
  */
 @Data
@@ -24,15 +27,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "t_idcard")
-public class IdCard {
+@Table(name = "t_people")
+public class People {
+
     @Id
     @Column(name = "t_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(name = "t_number")
-    private String number;
+    @Column(name = "t_name")
+    private String name;
+
+
+    @Column(name = "t_age")
+    private int age;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name = "t_birthday")
+    private Date birthday;
+
+    @Column(name = "t_address")
+    private String address;
+
 
 
 }

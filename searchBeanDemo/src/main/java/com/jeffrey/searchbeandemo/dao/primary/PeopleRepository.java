@@ -1,7 +1,7 @@
-package com.jeffrey.searchbeandemo.repository;
+package com.jeffrey.searchbeandemo.dao.primary;
 
 
-import com.jeffrey.searchbeandemo.entity.People;
+import com.jeffrey.searchbeandemo.entity.primary.People;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  * @date 2022/11/13 11:18
  * @description
  */
-@Repository
+@Repository(value = "peopleRepository")
 public interface PeopleRepository extends JpaRepository<People,Integer> {
 }

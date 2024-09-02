@@ -4,6 +4,9 @@ import cn.zhxu.bs.MapSearcher;
 import cn.zhxu.bs.SearchResult;
 import cn.zhxu.bs.util.MapUtils;
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
+import com.jeffrey.searchbeandemo.dao.primary.PeoplePrimaryRepository;
+import com.jeffrey.searchbeandemo.dao.second.PeopleSecondRepository;
+import com.jeffrey.searchbeandemo.entity.primary.PeopleManyDataSourceVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeoPleIdCardVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleBuildSqlVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleDTO;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,6 +51,12 @@ public class PeopleBeanSearchController {
 
     @Autowired
     private PeopleService peopleService;
+
+    @Autowired
+    private PeoplePrimaryRepository peoplePrimaryRepository;
+
+    @Autowired
+    private PeopleSecondRepository peopleSecondRepository;
 
     @GetMapping("/index")
     public SearchResult<Map<String, Object>> index(HttpServletRequest request) {
@@ -173,5 +183,21 @@ public class PeopleBeanSearchController {
         CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request);
         return peopleService.getPeopleLogicGroup(customerHttpServletRequest);
     }
+
+    /**
+     * 多数据源
+     */
+    @GetMapping("/people/manyDataSourcePrimary")
+    @Operation(summary = "people-多数据源", description = "people-多数据源")
+    public List<PeopleManyDataSourceVO> getPeopleManyDataSource(HttpServletRequest request) {
+        return peoplePrimaryRepository.findAllById(2);
+    }
+
+    @GetMapping("/people/manyDataSourceSecond")
+    @Operation(summary = "people-多数据源second", description = "people-多数据源second")
+    public List<com.jeffrey.searchbeandemo.entity.second.PeopleManyDataSourceVO> getPeopleManyDataSourceSecond(HttpServletRequest request) {
+        return peopleSecondRepository.findAllById(2);
+    }
+
 
 }
