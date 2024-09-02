@@ -1,6 +1,8 @@
 package com.jeffrey.searchbeandemo.service;
 
+import cn.zhxu.bs.util.MapUtils;
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleBuildSqlVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleDTO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
@@ -14,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * @author jeffrey
@@ -189,5 +193,23 @@ public class PeopleService {
          *             "tage": 23
          *         }
          */
+    }
+
+    public Page<PeopleBuildSqlVO> getPeopleBuildSql(CustomerHttpServletRequest customerHttpServletRequest) {
+        Map<String, Object> params = MapUtils.builder()
+                // 生成 SQL 条件：id < ? or age > ?，两个占位符参数分别为：100，10
+                .field(PeopleBuildSqlVO::getId, PeopleBuildSqlVO::getAge).sql("$1 < ? or $2 > ?", 100, 10)
+                .build();
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest, PeopleBuildSqlVO.class,params);
+
+        /**
+         * sql: [select t_id c_0, t_name c_1, t_age c_2, t_birthday c_3, t_address c_4
+         * from t_people
+         * where (t_id < ? or t_age > ?)
+         * limit ?, ?]
+         * params: [100, 10, 0, 100]
+         */
+
+
     }
 }

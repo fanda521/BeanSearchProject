@@ -5,6 +5,7 @@ import cn.zhxu.bs.SearchResult;
 import cn.zhxu.bs.util.MapUtils;
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
 import com.jeffrey.searchbeandemo.entity.vo.PeoPleIdCardVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleBuildSqlVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleDTO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -149,5 +151,16 @@ public class PeopleBeanSearchController {
         CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request);
         return peopleService.getPeopleDefaultValue(customerHttpServletRequest);
     }
+
+    /**
+     * 自定义sql
+     */
+    @GetMapping("/people/buildSql")
+    @Operation(summary = "people-自定义sql", description = "people-自定义sql")
+    public Page<PeopleBuildSqlVO> getPeopleBuildSql(HttpServletRequest request) {
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request);
+        return peopleService.getPeopleBuildSql(customerHttpServletRequest);
+    }
+
 
 }

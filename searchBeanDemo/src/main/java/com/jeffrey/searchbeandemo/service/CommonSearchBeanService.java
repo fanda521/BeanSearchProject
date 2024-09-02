@@ -5,6 +5,8 @@ import cn.zhxu.bs.SearchResult;
 import cn.zhxu.bs.util.MapUtils;
 import com.jeffrey.searchbeandemo.common.AllResultsPaginationProcessor;
 import com.jeffrey.searchbeandemo.common.PaginationInfo;
+import com.jeffrey.searchbeandemo.common.SysUtil;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleBuildSqlVO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -83,7 +85,11 @@ public class CommonSearchBeanService {
     public <T> Page<T> searchAndWarpToJpaPage(HttpServletRequest request, Class<T> clazz, Map map) {
         Integer page = Integer.valueOf(request.getParameter("page"));
         Integer size = Integer.valueOf(request.getParameter("size"));
-        SearchResult<T> search = beanSearcher.search(clazz, MapUtils.flat(request.getParameterMap()));
+        Map<String, Object> flat = MapUtils.flat(request.getParameterMap());
+        if (SysUtil.isNotNull(map)) {
+            flat.putAll(map);
+        }
+        SearchResult<T> search = beanSearcher.search(clazz, flat);
         Number totalCount = search.getTotalCount();
         if (totalCount.intValue() > 0) {
             List<T> dataList = search.getDataList();
