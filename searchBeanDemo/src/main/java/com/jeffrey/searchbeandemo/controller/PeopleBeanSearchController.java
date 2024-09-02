@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -69,7 +70,9 @@ public class PeopleBeanSearchController {
     @GetMapping("/people/sonWhere")
     @Operation(summary = "people-条件分页查询sonWhere", description = "people-条件分页查询sonWhere")
     public Page<PeopleSonWhereVO> getPeopleConditionSonWhere(HttpServletRequest request) {
-        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request);
+        Map<String, String[]> map = new HashMap<>();
+        map.put("orderBy",new String[]{"cardNumber:desc"});
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request,map);
         return peopleService.getPeopleConditionSonWhere(customerHttpServletRequest);
     }
 

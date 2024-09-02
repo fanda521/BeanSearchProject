@@ -52,7 +52,7 @@ public class PeopleService {
 
 
         /**
-         * 加上去重
+         * 再加上去重
          * sql: [select distinct t.t_id c_0, t.t_name c_1, t.t_age c_2, t.t_birthday c_3, t.t_address c_4, (select c.t_number from t_idcard c where c.t_people_id = t.t_id)
          * from t_people t
          * where ((select c.t_id from t_idcard c where c.t_people_id = t.t_id) >= 2)
@@ -61,13 +61,46 @@ public class PeopleService {
          */
 
         /**
-         * 加上分组
+         * 再加上分组
          * sql: [select distinct t.t_id c_0, t.t_name c_1, t.t_age c_2, t.t_birthday c_3, t.t_address c_4,
          * (select c.t_number from t_idcard c where c.t_people_id = t.t_id) c_5 from t_people t
          * where ((select c.t_id from t_idcard c where c.t_people_id = t.t_id) >= 2)
          * group by t.t_age having (sum(t.t_age) > 10)
          * limit ?, ?]
          * params: [0, 100]
+         */
+
+        /** 再加上别名
+         * sql: [select distinct (select c.t_number from t_idcard c where c.t_people_id = t.t_id) cardNumber,
+         * t.t_id c_1, t.t_name c_2, t.t_age c_3, t.t_birthday c_4, t.t_address c_5
+         * from t_people t
+         * where ((select c.t_id from t_idcard c where c.t_people_id = t.t_id) >= 2)
+         * group by t.t_age
+         * having (sum(t.t_age) > 10)
+         * limit ?, ?]
+         * params: [0, 100]
+         */
+
+        /** 再加上默认的固定排序
+         * sql: [select distinct (select c.t_number from t_idcard c where c.t_people_id = t.t_id) cardNumber,
+         * t.t_id c_1, t.t_name c_2, t.t_age c_3, t.t_birthday c_4, t.t_address c_5
+         * from t_people t
+         * where ((select c.t_id from t_idcard c where c.t_people_id = t.t_id) >= 2)
+         * group by t.t_age having (sum(t.t_age) > 10)
+         * order by t_id desc limit ?, ?]
+         * params: [0, 100]
+         */
+
+        /**
+         * 再加上自定义的排序，会覆盖前面默认的固定排序
+         * sql: [select distinct (select c.t_number from t_idcard c where c.t_people_id = t.t_id) cardNumber,
+         * t.t_id c_1, t.t_name c_2, t.t_age c_3, t.t_birthday c_4, t.t_address c_5
+         * from t_people t
+         * where ((select c.t_id from t_idcard c where c.t_people_id = t.t_id) >= 2)
+         * group by t.t_age having (sum(t.t_age) > 10)
+         * order by cardNumber desc limit ?, ?]
+         * params: [0, 100]
+         *
          */
     }
 }

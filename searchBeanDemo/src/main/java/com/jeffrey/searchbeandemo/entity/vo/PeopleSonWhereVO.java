@@ -22,7 +22,8 @@ import java.util.Date;
     where = "(select c.t_id from t_idcard c where c.t_people_id = t.t_id) >= 2",
         distinct = true,
         groupBy = "t.t_age",
-        having = "sum(t.t_age) > 10"
+        having = "sum(t.t_age) > 10",
+        orderBy = "t_id desc"
 )
 @AllArgsConstructor
 @NoArgsConstructor
@@ -47,6 +48,6 @@ public class PeopleSonWhereVO {
     @DbField("t.t_address")
     private String address;
 
-    @DbField("select c.t_number from t_idcard c where c.t_people_id = t.t_id")
+    @DbField(value = "select c.t_number from t_idcard c where c.t_people_id = t.t_id", alias = "cardNumber")
     private String cardNumber;
 }
