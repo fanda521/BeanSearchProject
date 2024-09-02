@@ -5,6 +5,7 @@ import cn.zhxu.bs.SearchResult;
 import cn.zhxu.bs.util.MapUtils;
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
 import com.jeffrey.searchbeandemo.entity.vo.PeoPleIdCardVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleDTO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams4VO;
@@ -139,5 +140,14 @@ public class PeopleBeanSearchController {
         return peopleService.getPeopleEmbedParams4(customerHttpServletRequest);
     }
 
+    /**
+     * 省略注解，默认值
+     */
+    @GetMapping("/people/DefaultValue")
+    @Operation(summary = "people-省略注解，默认值", description = "people-省略注解，默认值")
+    public Page<PeopleDTO> getPeopleDefaultValue(HttpServletRequest request) {
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request);
+        return peopleService.getPeopleDefaultValue(customerHttpServletRequest);
+    }
 
 }

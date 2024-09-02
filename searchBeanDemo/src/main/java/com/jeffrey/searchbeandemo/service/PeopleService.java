@@ -1,6 +1,7 @@
 package com.jeffrey.searchbeandemo.service;
 
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleDTO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams4VO;
@@ -173,6 +174,20 @@ public class PeopleService {
          * where (t.t_id > ?)
          * limit ?, ?]
          * params: [1, 0, 100]
+         */
+    }
+
+    public Page<PeopleDTO> getPeopleDefaultValue(CustomerHttpServletRequest customerHttpServletRequest) {
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest,PeopleDTO.class);
+        /**
+         * 返回的字段没有首字母大写
+         * {
+         *             "name": "jeffrey",
+         *             "birthday": "2023-09-14 03:44:46",
+         *             "address": "江西南昌",
+         *             "tid": 1,
+         *             "tage": 23
+         *         }
          */
     }
 }
