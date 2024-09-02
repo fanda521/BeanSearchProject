@@ -1,6 +1,11 @@
 package com.jeffrey.searchbeandemo.service;
 
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams4VO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParamsVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleManyTableVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonSelectVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonWhereVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleVO;
@@ -101,6 +106,73 @@ public class PeopleService {
          * order by cardNumber desc limit ?, ?]
          * params: [0, 100]
          *
+         */
+    }
+
+    public Page<PeopleManyTableVO> getPeopleConditionManyTables(CustomerHttpServletRequest customerHttpServletRequest) {
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest,PeopleManyTableVO.class);
+
+        /** 子查询的关联
+         * ql: [select t.t_id c_0, t.t_name c_1, t.t_age c_2, t.t_birthday c_3, t.t_address c_4, u.t_number c_5
+         * from t_people t  left join (select u.t_id,u.t_number,u.t_people_id from t_idcard u) as u
+         * on u.t_people_id = t.t_id
+         * limit ?, ?]
+         * params: [0, 100]
+         */
+
+
+    }
+
+    public Page<PeopleEmbedParamsVO> getPeopleEmbedParams(CustomerHttpServletRequest customerHttpServletRequest) {
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest,PeopleEmbedParamsVO.class);
+
+        /**
+         * sql: [select
+         * (select c.t_number from t_idcard c where c.t_people_id = t.t_id) cardNumber,
+         * t.t_id c_1, t.t_name c_2, t.t_age c_3, t.t_birthday c_4, t.t_address c_5
+         * from (select * from t_people t where t.t_id > ?) t
+         * limit ?, ?]
+         * params: [1, 0, 100]
+         */
+    }
+
+    public Page<PeopleEmbedParams2VO> getPeopleEmbedParams2(CustomerHttpServletRequest customerHttpServletRequest) {
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest,PeopleEmbedParams2VO.class);
+
+        /**
+         * sql: [select
+         * (select c.t_number from t_idcard c where c.t_people_id = t.t_id) cardNumber,
+         * t.t_id c_1, t.t_name c_2, t.t_age c_3, t.t_birthday c_4, t.t_address c_5
+         * from (select * from t_people t where t.t_id > ?) t
+         * limit ?, ?]
+         * params: [1, 0, 100]
+         */
+    }
+
+    public Page<PeopleEmbedParams3VO> getPeopleEmbedParams3(CustomerHttpServletRequest customerHttpServletRequest) {
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest,PeopleEmbedParams3VO.class);
+        /**
+         * sql: [select
+         * (select c.t_number from t_idcard c where c.t_people_id = t.t_id) cardNumber,
+         * t.t_id c_1, t.t_name c_2, t.t_age c_3, t.t_birthday c_4, t.t_address c_5
+         * from (select * from t_people) t
+         * where (t.t_id > ?)
+         * limit ?, ?]
+         * params: [1, 0, 100]
+         */
+    }
+
+    public Page<PeopleEmbedParams4VO> getPeopleEmbedParams4(CustomerHttpServletRequest customerHttpServletRequest) {
+        return  commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest, PeopleEmbedParams4VO.class);
+
+        /**
+         * sql: [select
+         * (select c.t_number from t_idcard c where c.t_people_id = t.t_id) cardNumber,
+         * t.t_id c_1, t.t_name c_2, t.t_age c_3, t.t_birthday c_4, t.t_address c_5
+         * from (select * from t_people) t
+         * where (t.t_id > ?)
+         * limit ?, ?]
+         * params: [1, 0, 100]
          */
     }
 }

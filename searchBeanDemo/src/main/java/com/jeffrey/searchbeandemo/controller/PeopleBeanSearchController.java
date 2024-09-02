@@ -5,6 +5,11 @@ import cn.zhxu.bs.SearchResult;
 import cn.zhxu.bs.util.MapUtils;
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
 import com.jeffrey.searchbeandemo.entity.vo.PeoPleIdCardVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams4VO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParamsVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleManyTableVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonSelectVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonWhereVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleVO;
@@ -76,6 +81,63 @@ public class PeopleBeanSearchController {
         return peopleService.getPeopleConditionSonWhere(customerHttpServletRequest);
     }
 
+
+    /**
+     * 多表关联
+     */
+    @GetMapping("/people/manyTables")
+    @Operation(summary = "people-条件分页查询-多表关联", description = "people-条件分页查询-多表关联")
+    public Page<PeopleManyTableVO> getPeopleConditionManyTables(HttpServletRequest request) {
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request);
+        return peopleService.getPeopleConditionManyTables(customerHttpServletRequest);
+    }
+
+
+    /**
+     * 嵌入参数
+     */
+
+    @GetMapping("/people/embedParams")
+    @Operation(summary = "people-条件分页查询-嵌入参数", description = "people-条件分页查询-嵌入参数")
+    public Page<PeopleEmbedParamsVO> getPeopleEmbedParams(HttpServletRequest request) {
+        Map<String, String[]> map = new HashMap<>();
+        map.put("peopleId",new String[]{"1"});
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request,map);
+        return peopleService.getPeopleEmbedParams(customerHttpServletRequest);
+    }
+
+    @GetMapping("/people/embedParams2")
+    @Operation(summary = "people-条件分页查询-嵌入参数2", description = "people-条件分页查询-嵌入参数2")
+    public Page<PeopleEmbedParams2VO> getPeopleEmbedParams2(HttpServletRequest request) {
+        Map<String, String[]> map = new HashMap<>();
+        // tables 不能再使用参数，识别不了
+        map.put("tables",new String[]{"(select * from t_people t where t.t_id > 1) t"});
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request,map);
+        return peopleService.getPeopleEmbedParams2(customerHttpServletRequest);
+    }
+
+    @GetMapping("/people/embedParams3")
+    @Operation(summary = "people-条件分页查询-嵌入参数3", description = "people-条件分页查询-嵌入参数3")
+    public Page<PeopleEmbedParams3VO> getPeopleEmbedParams3(HttpServletRequest request) {
+        Map<String, String[]> map = new HashMap<>();
+        // 双重参数
+        map.put("tables",new String[]{"(select * from t_people) t"});
+        map.put("peopleId",new String[]{"1"});
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request,map);
+        return peopleService.getPeopleEmbedParams3(customerHttpServletRequest);
+    }
+
+    @GetMapping("/people/embedParams4")
+    @Operation(summary = "people-条件分页查询-嵌入参数4", description = "people-条件分页查询-嵌入参数4")
+    public Page<PeopleEmbedParams4VO> getPeopleEmbedParams4(HttpServletRequest request) {
+        Map<String, String[]> map = new HashMap<>();
+        // 三重参数
+        map.put("tables",new String[]{"(select * from t_people) t"});
+        map.put("peopleId",new String[]{"1"});
+        map.put("field1",new String[]{"t.t_age"});
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request,map);
+        return peopleService.getPeopleEmbedParams4(customerHttpServletRequest);
+    }
 
 
 }
