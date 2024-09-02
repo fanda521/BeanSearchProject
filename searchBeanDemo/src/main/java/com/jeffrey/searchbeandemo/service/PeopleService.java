@@ -8,6 +8,7 @@ import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams4VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParamsVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleLogicGroupVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleManyTableVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonSelectVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonWhereVO;
@@ -211,5 +212,18 @@ public class PeopleService {
          */
 
 
+    }
+
+    public Page<PeopleLogicGroupVO> getPeopleLogicGroup(CustomerHttpServletRequest customerHttpServletRequest) {
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest, PeopleLogicGroupVO.class);
+
+        /**
+         * http://localhost:8888/beanSearchPeople/people/logicGroup?page=0&size=100&A.id=1&A.id-op=gt&B.name=je&B.name-op=ct&C.age=5&gexpr=(A%7CB)%26C&C.age-op=gt
+         * sql: [select t_id c_0, t_name c_1, t_age c_2, t_birthday c_3, t_address c_4
+         * from t_people
+         * where (((t_id > ?) or (t_name like ?)) and (t_age > ?))
+         * limit ?, ?]
+         * params: [1, %je%, 5, 0, 100]
+         */
     }
 }

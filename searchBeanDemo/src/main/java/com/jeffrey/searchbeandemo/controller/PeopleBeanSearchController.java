@@ -11,6 +11,7 @@ import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams4VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParamsVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleLogicGroupVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleManyTableVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonSelectVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonWhereVO;
@@ -162,5 +163,15 @@ public class PeopleBeanSearchController {
         return peopleService.getPeopleBuildSql(customerHttpServletRequest);
     }
 
+    /**
+     * 逻辑分组
+     */
+
+    @GetMapping("/people/logicGroup")
+    @Operation(summary = "people-逻辑分组", description = "people-逻辑分组")
+    public Page<PeopleLogicGroupVO> getPeopleLogicGroup(HttpServletRequest request) {
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request);
+        return peopleService.getPeopleLogicGroup(customerHttpServletRequest);
+    }
 
 }
