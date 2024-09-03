@@ -15,6 +15,7 @@ import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams4VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParamsVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleLogicGroupVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleManyDataSourceDTO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleManyTableVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonSelectVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonWhereVO;
@@ -29,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -189,7 +189,7 @@ public class PeopleBeanSearchController {
      */
     @GetMapping("/people/manyDataSourcePrimary")
     @Operation(summary = "people-多数据源", description = "people-多数据源")
-    public List<PeopleManyDataSourceVO> getPeopleManyDataSource(HttpServletRequest request) {
+    public List<PeopleManyDataSourceVO> getPeopleManyDataSourcePrimary(HttpServletRequest request) {
         return peoplePrimaryRepository.findAllById(2);
     }
 
@@ -199,5 +199,11 @@ public class PeopleBeanSearchController {
         return peopleSecondRepository.findAllById(2);
     }
 
+    @GetMapping("/people/manyDataSource")
+    @Operation(summary = "people-多数据源", description = "people-多数据源")
+    public Page<PeopleManyDataSourceDTO> getPeopleManyDataSource(HttpServletRequest request) {
+        CustomerHttpServletRequest customerHttpServletRequest = new CustomerHttpServletRequest(request);
+        return peopleService.getPeopleManyDataSource(customerHttpServletRequest);
+    }
 
 }

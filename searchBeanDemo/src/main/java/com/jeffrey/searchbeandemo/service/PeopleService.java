@@ -2,7 +2,6 @@ package com.jeffrey.searchbeandemo.service;
 
 import cn.zhxu.bs.util.MapUtils;
 import com.jeffrey.searchbeandemo.common.CustomerHttpServletRequest;
-import com.jeffrey.searchbeandemo.entity.primary.PeopleManyDataSourceVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleBuildSqlVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleDTO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams2VO;
@@ -10,6 +9,7 @@ import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams3VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParams4VO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleEmbedParamsVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleLogicGroupVO;
+import com.jeffrey.searchbeandemo.entity.vo.PeopleManyDataSourceDTO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleManyTableVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonSelectVO;
 import com.jeffrey.searchbeandemo.entity.vo.PeopleSonWhereVO;
@@ -228,7 +228,7 @@ public class PeopleService {
          */
     }
 
-    public Page<PeopleManyDataSourceVO> getPeopleManyDataSource(CustomerHttpServletRequest customerHttpServletRequest) {
-        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest, PeopleManyDataSourceVO.class);
+    public Page<PeopleManyDataSourceDTO> getPeopleManyDataSource(CustomerHttpServletRequest customerHttpServletRequest) {
+        return commonSearchBeanService.searchAndWarpToJpaPage(customerHttpServletRequest, PeopleManyDataSourceDTO.class);
     }
 }

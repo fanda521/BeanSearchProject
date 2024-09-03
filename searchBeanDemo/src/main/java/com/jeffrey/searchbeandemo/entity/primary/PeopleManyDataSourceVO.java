@@ -27,7 +27,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Table(name="t_people")
-@SearchBean(tables = "t_people",dataSource = "primaryDataSource")
 public class PeopleManyDataSourceVO {
 
     @DbField("t_id")

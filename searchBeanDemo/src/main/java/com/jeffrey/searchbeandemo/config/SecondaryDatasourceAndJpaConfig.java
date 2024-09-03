@@ -1,5 +1,6 @@
 package com.jeffrey.searchbeandemo.config;
 
+import cn.zhxu.bs.boot.NamedDataSource;
 import com.jeffrey.searchbeandemo.common.cons.CommonConst;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -49,6 +50,13 @@ public class SecondaryDatasourceAndJpaConfig {
     @Bean("secondaryDataSource")
     public DataSource dataSource(@Qualifier("secondaryDataSourceProperties") DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder().build();
+    }
+
+    @Bean
+    public NamedDataSource userNamedDataSource(@Qualifier("secondaryDataSourceProperties") DataSourceProperties dataSourceProperties) {
+        DataSource dataSource = dataSourceProperties.initializeDataSourceBuilder().build();
+        // 具名数据源：cn.zhxu.bs.boot.NamedDataSource
+        return new NamedDataSource("manyDataSource", dataSource);
     }
  
     /**

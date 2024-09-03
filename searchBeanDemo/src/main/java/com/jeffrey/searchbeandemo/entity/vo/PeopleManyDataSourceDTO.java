@@ -18,11 +18,11 @@ import java.util.Date;
  * @description 多数据源
  **/
 
-@SearchBean(tables = "t_people",dataSource = "secondDsProps")
+@SearchBean(tables = "t_people",dataSource = "manyDataSource")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PeopleManyDataSourceVO {
+public class PeopleManyDataSourceDTO {
 
     @DbField("t_id")
     private Integer id;
