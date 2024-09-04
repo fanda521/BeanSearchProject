@@ -18,4 +18,9 @@ public class CommonConst {
     public static final String SECOND_REPOSITORY_PACKAGE = "com.jeffrey.searchbeandemo.dao.second";
     public static final String SECOND_ENTITY_PACKAGE = "com.jeffrey.searchbeandemo.entity.second";
     public static final String SECOND_DAO_BEAN_NAME = "secondPeopleRepository";
+
+
+    public static final String DYNAMIC_REPOSITORY_PACKAGE = "com.jeffrey.searchbeandemo.dao";
+    public static final String DYNAMIC__ENTITY_PACKAGE = "com.jeffrey.searchbeandemo.entity";
+    public static final String DYNAMIC__DAO_BEAN_NAME = "peopleRepositoryMany";
 }
